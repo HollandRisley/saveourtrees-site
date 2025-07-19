@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-version="1.1">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Save Kingsteignton’s Trees – Stop the Zitherixon Quarry Expansion</title>
+  <meta name="description" content="Community campaign to protect Kingsteignton's last major woodland from long-term ball clay quarry expansion. Join us, stay informed, take action." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #2a5d34;
+      --cream: #F4F0E6;
+      --white: #ffffff;
+      --focus: #13431d;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--green);
+      background: var(--white);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); }
+    a:focus, button:focus, input:focus, textarea:focus {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    header {
+      position: relative;
+      background-image: url('./images/tiledtrees.jpg');
+      background-repeat: repeat-x;
+      background-position: top center;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      color: var(--white);
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(42,93,52,0.6);
+    }
+    header h1, header p, header .callout { position: relative; z-index: 1; }
+    header h1 {
+      font-weight: 700;
+      font-size: 2.6rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.5px;
+      line-height: 2.6rem;
+    }
+    header p {
+      font-style: italic;
+      margin-bottom: 1.3rem;
+      font-size: 1.5rem;
+  
+      line-height: 1.75;
+    }
+    /* Optional rotating tagline (just swap innerText via JS)
+    <p id="tagline" class="tagline"></p>
+    */
+    .callout {
+      display: inline-block;
+      max-width: 600px;
+      width: calc(100% - 2rem);
+      margin: 0 auto;
+      background: var(--cream);
+      color: var(--green);
+      padding: 0.7rem 1rem 0.8rem;
+      font-weight: 700;
+      border-radius: 6px;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+    .callout strong { display: inline-block; }
+
+    section {
+      max-width: 800px;
+      margin: 2.2rem auto;
+      padding: 0 1rem;
+    }
+    .two-col {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .two-col > div {
+      flex: 1 1 300px;
+      min-width: 280px;
+    }
+
+    .why h2,
+    .get-involved h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Reasons list with icons */
+    .why .reason {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .why .reason img {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .why .reason p {
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    /* Get Involved panel */
+    .get-involved {
+      background: var(--cream);
+      padding: 1.2rem 1.2rem 1.4rem;
+      border-radius: 6px;
+    }
+    .get-involved ol {
+      margin: 0 0 1rem 1.3rem;
+      padding: 0;
+    }
+    .get-involved ol li {
+      margin-bottom: 0.55rem;
+      padding-left: 0.2rem;
+    }
+
+    .get-involved form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+    .get-involved label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+    .get-involved input {
+      padding: 0.55rem 0.6rem;
+      font-size: 1rem;
+      border: 1px solid #c9c9c9;
+      border-radius: 4px;
+      background: var(--white);
+      transition: border-color .15s;
+    }
+    .get-involved form {gap: 0.55rem;}
+    .get-involved input:focus {
+      border-color: var(--green);
+    }
+    .get-involved button {
+      padding: 0.65rem 0.8rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      background: var(--green);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background .2s;
+      margin-top: 0.6em;
+    }
+    .get-involved button:hover,
+    .get-involved button:focus {
+      background: #1f4727;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 1.5rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    footer .disclaimer {
+      display: block;
+      max-width: 820px;
+      margin: 0.6rem auto 0;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 650px) {
+      header { height: auto; padding: 2.2rem 1rem 2.4rem; }
+      header h1 { font-size: 2.1rem; }
+      header p { font-size: 1.2rem; }
+      .callout { font-size: 0.95rem; }
+      .two-col { flex-direction: column; }
+      .get-involved { order: 2; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>STOP THE CLAY QUARRY EXPANSION</h1>
+    <p>Protect Kingsteignton's trees and local environment</p>
+    <div class="callout">
+      <strong>Public Meeting • Tues 22 July (3pm – 8pm)</strong><br/>
+      Paddock Suite • Newton Abbot Racecourse
+    </div>
+  </header>
+
+  <section role="region" aria-labelledby="why-heading">
+    <div class="two-col">
+      <!-- Left column: reasons with icons -->
+      <div class="why">
+        <h2 id="why-heading">Why This Matters</h2>
+
+        <div class="reason">
+          <img src="./images/bird_icon.gif" alt="Wildlife habitat icon" />
+          <p>Destruction of Kingsteignton's last large area of mature woodland habitat (protected bats, dormice, birds).</p>
+        </div>
+
+        <div class="reason">
+          <img src="./images/lung_icon.gif" alt="Air & health icon" />
+          <p>50 years of harmful silica dust, noise & HGV traffic beside homes and schools.</p>
+        </div>
+
+        <div class="reason">
+          <img src="./images/water_icon.gif" alt="Flood risk icon" />
+          <p>Tree removal strips natural flood buffering—2024 already saw the worst local flooding in decades.</p>
+        </div>
+
+        <div class="reason">
+          <img src="./images/policy_icon.gif" alt="Planning policy icon" />
+          <p>Conflicts with Teignbridge Local Plan (EN2A, EN8–EN12) & Devon Minerals Plan M6 safeguarding landscape, habitats & community.</p>
+        </div>
+      </div>
+
+      <!-- Right column: Get Involved -->
+      <div class="get-involved">
+        <h2>Get Involved</h2>
+        <ol>
+          <li>Register for email updates now.</li>
+          <li>Attend the public meeting (22 July).</li>
+          <li>Share this with friends & neighbours.</li>
+        </ol>
+        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+          <label for="email">Email</label>
+            <input type="email" id="email" name="_replyto" required autocomplete="email" />
+          <button type="submit" aria-label="Sign up for campaign updates">Get updates</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Save Kingsteignton Trees Campaign &middot;
+    <a href="mailto:contact@saveourtrees.org.uk">contact@saveourtrees.org.uk</a>
+    <span class="disclaimer">
+      Independent residents’ campaign. We are not affiliated with Sibelco or any public authority. Information provided in good faith; always verify official planning deadlines on the council portal.
+    </span>
+  </footer>
+
+  <!-- Optional: JS for rotating tagline
+  <script>
+    const taglines = [
+      "Protect our last major woodland from long-term quarry expansion",
+      "Trees slow floods, filter air & shelter wildlife—let’s keep them",
+      "Healthy woodland today means safer, cleaner streets tomorrow"
+    ];
+    // document.querySelector('#tagline').innerText = taglines[0];
+  </script>
+  -->
+</body>
+</html>
