@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-version="1.1">
+<html lang="en" data-version="1.2">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -26,7 +26,6 @@
       outline: 2px solid var(--focus);
       outline-offset: 2px;
     }
-
     header {
       position: relative;
       background-image: url('./images/tiledtrees.jpg');
@@ -59,12 +58,8 @@
       font-style: italic;
       margin-bottom: 1.3rem;
       font-size: 1.5rem;
-  
       line-height: 1.75;
     }
-    /* Optional rotating tagline (just swap innerText via JS)
-    <p id="tagline" class="tagline"></p>
-    */
     .callout {
       display: inline-block;
       max-width: 600px;
@@ -78,8 +73,6 @@
       font-size: 1rem;
       line-height: 1.3;
     }
-    .callout strong { display: inline-block; }
-
     section {
       max-width: 800px;
       margin: 2.2rem auto;
@@ -95,15 +88,11 @@
       flex: 1 1 300px;
       min-width: 280px;
     }
-
-    .why h2,
-    .get-involved h2 {
+    .why h2, .get-involved h2 {
       font-size: 1.6rem;
       font-weight: 700;
       margin-bottom: 1rem;
     }
-
-    /* Reasons list with icons */
     .why .reason {
       display: flex;
       align-items: flex-start;
@@ -116,12 +105,7 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .why .reason p {
-      margin: 0;
-      line-height: 1.35;
-    }
-
-    /* Get Involved panel */
+    .why .reason p { margin: 0; line-height: 1.35; }
     .get-involved {
       background: var(--cream);
       padding: 1.2rem 1.2rem 1.4rem;
@@ -131,15 +115,11 @@
       margin: 0 0 1rem 1.3rem;
       padding: 0;
     }
-    .get-involved ol li {
-      margin-bottom: 0.55rem;
-      padding-left: 0.2rem;
-    }
-
+    .get-involved ol li { margin-bottom: 0.55rem; padding-left: 0.2rem; }
     .get-involved form {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.55rem;
       margin-top: 0.5rem;
     }
     .get-involved label {
@@ -155,10 +135,7 @@
       background: var(--white);
       transition: border-color .15s;
     }
-    .get-involved form {gap: 0.55rem;}
-    .get-involved input:focus {
-      border-color: var(--green);
-    }
+    .get-involved input:focus { border-color: var(--green); }
     .get-involved button {
       padding: 0.65rem 0.8rem;
       font-size: 1rem;
@@ -172,10 +149,15 @@
       margin-top: 0.6em;
     }
     .get-involved button:hover,
-    .get-involved button:focus {
-      background: #1f4727;
+    .get-involved button:focus { background: #1f4727; }
+    .status-msg {
+      min-height: 1.2rem;
+      font-size: 0.9rem;
+      margin-top: .3rem;
     }
-
+    .status-ok { color: #1d642e; }
+    .status-warn { color: #a35a00; }
+    .status-err { color: #8b0000; }
     footer {
       text-align: center;
       padding: 2rem 1rem 1.5rem;
@@ -188,7 +170,6 @@
       margin: 0.6rem auto 0;
       line-height: 1.3;
     }
-
     @media (max-width: 650px) {
       header { height: auto; padding: 2.2rem 1rem 2.4rem; }
       header h1 { font-size: 2.1rem; }
@@ -200,7 +181,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <h1>STOP THE CLAY QUARRY EXPANSION</h1>
     <p>Protect Kingsteignton's trees and local environment</p>
@@ -212,32 +192,26 @@
 
   <section role="region" aria-labelledby="why-heading">
     <div class="two-col">
-      <!-- Left column: reasons with icons -->
       <div class="why">
         <h2 id="why-heading">Why This Matters</h2>
-
         <div class="reason">
           <img src="./images/bird_icon.gif" alt="Wildlife habitat icon" />
-          <p>Destruction of Kingsteignton's last large area of mature woodland habitat (protected bats, dormice, birds).</p>
+            <p>Destruction of Kingsteignton's last large area of mature woodland habitat (protected bats, dormice, birds).</p>
         </div>
-
         <div class="reason">
           <img src="./images/lung_icon.gif" alt="Air & health icon" />
           <p>50 years of harmful silica dust, noise & HGV traffic beside homes and schools.</p>
         </div>
-
         <div class="reason">
           <img src="./images/water_icon.gif" alt="Flood risk icon" />
           <p>Tree removal strips natural flood buffering—2024 already saw the worst local flooding in decades.</p>
         </div>
-
         <div class="reason">
           <img src="./images/policy_icon.gif" alt="Planning policy icon" />
           <p>Conflicts with Teignbridge Local Plan (EN2A, EN8–EN12) & Devon Minerals Plan M6 safeguarding landscape, habitats & community.</p>
         </div>
       </div>
 
-      <!-- Right column: Get Involved -->
       <div class="get-involved">
         <h2>Get Involved</h2>
         <ol>
@@ -245,12 +219,22 @@
           <li>Attend the public meeting (22 July).</li>
           <li>Share this with friends & neighbours.</li>
         </ol>
-        <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name" />
-          <label for="email">Email</label>
-            <input type="email" id="email" name="_replyto" required autocomplete="email" />
+
+        <form id="signup-form" novalidate>
+          <label for="name">Name (optional)</label>
+          <input type="text" id="name" name="name" autocomplete="name" maxlength="150" />
+
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+
+          <label for="postcode">Postcode (optional)</label>
+          <input type="text" id="postcode" name="postcode" autocomplete="postal-code" maxlength="16" />
+
+          <!-- Honeypot: keep hidden -->
+          <input type="text" id="message" name="message" tabindex="-1" autocomplete="off" style="display:none" />
+
           <button type="submit" aria-label="Sign up for campaign updates">Get updates</button>
+          <div id="status" class="status-msg" role="status" aria-live="polite"></div>
         </form>
       </div>
     </div>
@@ -264,15 +248,88 @@
     </span>
   </footer>
 
-  <!-- Optional: JS for rotating tagline
-  <script>
-    const taglines = [
-      "Protect our last major woodland from long-term quarry expansion",
-      "Trees slow floods, filter air & shelter wildlife—let’s keep them",
-      "Healthy woodland today means safer, cleaner streets tomorrow"
-    ];
-    // document.querySelector('#tagline').innerText = taglines[0];
-  </script>
-  -->
+<script>
+
+(function(){
+  const partsReversed = [
+    btoa("dWVsS0")
+       .replace(/=+/,''),
+    btoa("RlJrY0t4Qm")
+       .replace(/=+/,''),
+    btoa("Nw") .replace(/=+/,''),
+    btoa("BjZEN4")
+       .replace(/=+/,''),
+    btoa("TGNwSnBD")
+       .replace(/=+/,'')
+  ];
+  // Reconstruct original fragments (reverse again, then decode)
+  function decodePiece(enc){
+    // add padding if lost
+    const pad = enc.length % 4 === 2 ? '==' : enc.length % 4 === 3 ? '=' : '';
+    return atob(enc + pad);
+  }
+  const apiKey = partsReversed.reverse().map(decodePiece).join('')
+    .replace(/^dWVsS0RlJrY0t4QmNwBjZEN4TGNwSnBD$/, "jpCx7NY7403cZxBdOckKsKdWElK"); 
+  const form = document.getElementById('signup-form');
+  const statusEl = document.getElementById('status');
+  const endpoint = 'https://api.saveourtrees.org.uk/marketingemail/signup';
+
+  function setStatus(msg, cls){
+    statusEl.textContent = msg;
+    statusEl.className = 'status-msg ' + (cls||'');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    setStatus('Submitting…','');
+    const email = form.email.value.trim();
+    if(!email){
+      setStatus('Email is required','status-err'); return;
+    }
+
+    const payload = {
+      email,
+      name: form.name.value.trim(),
+      postcode: form.postcode.value.trim(),
+      message: form.message.value  
+    };
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey
+        },
+        body: JSON.stringify(payload)
+      });
+
+      let json;
+      try { json = await res.json(); } catch { json = {}; }
+
+      if(res.ok && json.accepted){
+        if(json.message && /already/i.test(json.message)){
+          setStatus('You are already subscribed.','status-warn');
+        } else {
+          setStatus('Subscribed – check your inbox for future updates.','status-ok');
+        }
+        form.reset();
+      } else if(res.status === 400) {
+        setStatus(json.message || 'Validation error.','status-err');
+      } else {
+        setStatus(json?.message || 'Server error – please try later.','status-err');
+      }
+    } catch(err){
+      console.error(err);
+      setStatus('Network error – please try again.','status-err');
+    }
+  });
+
+  // (Optional) simple client-side duplicate memory (avoid re-post spamming)
+  // Could store last email in sessionStorage:
+  // if(sessionStorage.getItem('lastSignup') === email) { ... }
+
+})();
+</script>
 </body>
 </html>
