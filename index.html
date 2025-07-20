@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" data-version="1.3">
+<html lang="en" data-version="1.4">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Save Kingsteignton’s Trees – Stop the Zitherixon Quarry Expansion</title>
   <meta name="description" content="Community campaign to protect Kingsteignton's last major woodland from long-term ball clay quarry expansion. Join us, stay informed, take action." />
+  <link rel="canonical" href="https://saveourtrees.org.uk/">
+  <!-- Reduce stale HTML caching -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <style>
     :root { --green:#2a5d34; --cream:#F4F0E6; --white:#ffffff; --focus:#13431d; }
@@ -94,7 +99,7 @@
           <label for="name">Name *</label>
           <input type="text" id="name" name="name" required autocomplete="name" maxlength="150" />
 
-            <label for="email">Email *</label>
+          <label for="email">Email *</label>
           <input type="email" id="email" name="email" required autocomplete="email" />
 
           <label for="postcode">Postcode (optional)</label>
@@ -120,20 +125,6 @@
 
 <script>
 (function(){
-  const partsReversed = [
-    btoa("dWVsS0").replace(/=+/,''),
-    btoa("RlJrY0t4Qm").replace(/=+/,''),
-    btoa("Nw").replace(/=+/,''),
-    btoa("BjZEN4").replace(/=+/,''),
-    btoa("TGNwSnBD").replace(/=+/,'')
-  ];
-  function decodePiece(enc){
-    const pad = enc.length % 4 === 2 ? '==' : enc.length % 4 === 3 ? '=' : '';
-    return atob(enc + pad);
-  }
-  const apiKey = partsReversed.reverse().map(decodePiece).join('')
-    .replace(/^dWVsS0RlJrY0t4QmNwBjZEN4TGNwSnBD$/, "jpCx7NY7403cZxBdOckKsKdWElK");
-
   const form = document.getElementById('signup-form');
   const statusEl = document.getElementById('status');
   const endpoint = 'https://mentor-membership-dynamics-api.azurewebsites.net/marketingemail/signup';
@@ -145,21 +136,17 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    setStatus('Submitting…','');
+    setStatus('Submitting…');
 
     const name = form.name.value.trim();
     const email = form.email.value.trim();
-
-    if(!name){
-      setStatus('Name is required','status-err'); return;
-    }
-    if(!email){
-      setStatus('Email is required','status-err'); return;
-    }
+    if(!name){ setStatus('Name is required','status-err'); return; }
+    if(!email){ setStatus('Email is required','status-err'); return; }
+    if(form.message.value){ setStatus('Spam detected','status-err'); return; }
 
     const payload = {
-      email,
       name,
+      email,
       postcode: form.postcode.value.trim(),
       message: form.message.value
     };
@@ -167,15 +154,15 @@
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type':'application/json',
-          'x-api-key': apiKey
-        },
-        body: JSON.stringify(payload)
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify(payload),
+        mode: 'cors',
+        cache: 'no-cache'
       });
 
       let json = {};
-      try { json = await res.json(); } catch {}
+      const text = await res.text();
+      try { json = text ? JSON.parse(text) : {}; } catch {}
 
       if(res.ok && json.accepted){
         if(json.message && /already/i.test(json.message)){
@@ -186,6 +173,8 @@
         form.reset();
       } else if(res.status === 400){
         setStatus(json.message || 'Validation error.','status-err');
+      } else if(res.status === 403){
+        setStatus('Forbidden – please try later.','status-err');
       } else {
         setStatus(json.message || 'Server error – please try later.','status-err');
       }
