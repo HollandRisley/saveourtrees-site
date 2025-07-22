@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-version="2.5">
+<html lang="en" data-version="2.6">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
@@ -9,7 +9,7 @@
   <title>Save Kingsteignton’s Trees – Stop the Zitherixon Quarry Expansion</title>
   <meta name="description" content="Community campaign to protect Kingsteignton's last major woodland from long-term ball clay quarry expansion. Join us, stay informed, take action." />
 
-  <!-- Open Graph / Twitter Card for social previews -->
+  <!-- Open Graph / Twitter Card -->
   <meta property="og:title" content="STOP THE CLAY QUARRY EXPANSION" />
   <meta property="og:description" content="Public meeting Tues 22 July • 3–8 pm @ Newton Abbot Racecourse (Paddock Suite)" />
   <meta property="og:image" content="https://saveourtrees.org.uk/images/poster.jpg" />
@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
 
   <!-- Mailchimp base (leave before our overrides) -->
   <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css" />
@@ -38,7 +38,7 @@
       line-height:1.5;
       -webkit-font-smoothing:antialiased;
     }
-    a { color:var(--green); }
+    a { color:var(--green); text-decoration:none; }
     a:focus, button:focus, input:focus, textarea:focus {
       outline:2px solid var(--focus);
       outline-offset:2px;
@@ -109,14 +109,6 @@
       font-size:1.6rem;
       font-weight:700;
       margin-bottom:1rem;
-    }
-
-    .get-involved .required {
-
-      font-size: 0.8em;
-      font-weight: normal;
-
-
     }
 
     .why .reason {
@@ -195,7 +187,6 @@
       outline:none;
     }
 
-    /* Inline error messages (our style) */
     #mc_embed_signup .mce_inline_error,
     #mc_embed_signup div.mce_inline_error {
       background:transparent !important;
@@ -207,21 +198,15 @@
       border:none !important;
       line-height:1.1;
     }
-
-    /* Error input border (strong) */
     #mc_embed_signup input.mce_inline_error,
     #mc_embed_signup input.mce_inline_error:focus {
       border:2px solid var(--error) !important;
       background:var(--white) !important;
       box-shadow:none !important;
     }
-
-    /* Ensure if Mailchimp inserts error BEFORE input (occasionally happens) it still looks ok */
     #mc_embed_signup .mc-field-group .mce_inline_error + input {
       margin-top:0.35rem;
     }
-
-    /* Global response blocks */
     #mce-success-response, #mce-error-response {
       font-size:0.85rem;
       margin-top:0.6rem;
@@ -230,7 +215,6 @@
     #mce-success-response { color:#1d642e; }
     #mce-error-response { color:var(--error); }
 
-    /* Submit button */
     #mc_embed_signup .optionalParent { width:100%; }
     #mc_embed_signup .clear.foot { display:block; width:100%; margin-top:0.4rem; }
     #mc_embed_signup .button,
@@ -257,9 +241,51 @@
       border-color:#1f4727;
     }
 
+    /* ===== New map-row ===== */
+    .map-row {
+      display:flex;
+      gap:1rem;
+      margin:2rem auto 0;
+      max-width:800px;
+      padding:0 1rem;
+    }
+    .map-row .map-col {
+      flex:1;
+    }
+    .map-row img {
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius:4px;
+      cursor:pointer;
+    }
+
+    /* ===== Facebook follow ===== */
+    .follow-wrapper {
+      max-width:800px;
+      margin:1.5rem auto 2rem;
+      text-align:center;
+      padding:0 1rem;
+    }
+    .follow-wrapper a.follow-btn {
+      display:inline-block;
+      background:var(--green);
+      color:#fff;
+      font-weight:700;
+      text-decoration:none;
+      padding:0.9rem 1.5rem;
+      border-radius:6px;
+      transition:background .2s;
+      letter-spacing:.5px;
+    }
+    .follow-wrapper a.follow-btn:hover,
+    .follow-wrapper a.follow-btn:focus {
+      background:#1f4727;
+    }
+
     footer {
       text-align:center;
-      padding:2rem 1rem 1.5rem;
+      padding:1rem 1rem 2rem;
       font-size:0.8rem;
       color:#555;
     }
@@ -275,21 +301,58 @@
       header h1 { font-size:2.1rem; }
       header p { font-size:1.2rem; }
       .callout { font-size:0.95rem; }
-      .two-col { flex-direction:column; }
-      .get-involved { order:2; }
+      .two-col, .map-row { flex-direction:column; }
     }
 
-    /* ==== LAST OVERRIDES (win over any injected Mailchimp late styles) ==== */
-    #mc_embed_signup div.mce_inline_error {
-      background:transparent !important;
-      color:var(--error) !important;
-      padding:0 !important;
-      margin:0.35rem 0 0 0 !important;
-      font-weight:500 !important;
+    /* ——————— Modal Overlay ——————— */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+
+.modal-content img {
+  width: auto;
+  height: auto;
+  /* never taller than viewport minus 2rem of padding */
+  max-height: calc(100vh - 2rem);
+  /* never wider than viewport minus 2rem of padding */
+  max-width: calc(100vw - 2rem);
+  display: block;
+  border-radius: 4px;
+}
+    
+    .modal-close {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: #fff;
+      color: #333;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>STOP THE CLAY QUARRY EXPANSION</h1>
     <p>Protect Kingsteignton's trees and local environment</p>
@@ -301,7 +364,7 @@
 
   <section role="region" aria-labelledby="why-heading">
     <div class="two-col">
-      <!-- Reasons -->
+      <!-- Why This Matters -->
       <div class="why">
         <h2 id="why-heading">Why This Matters</h2>
         <div class="reason">
@@ -322,7 +385,7 @@
         </div>
       </div>
 
-      <!-- Get Involved with Mailchimp form -->
+      <!-- Get Involved (Mailchimp form) -->
       <div class="get-involved">
         <h2>Get Involved</h2>
         <ol>
@@ -330,7 +393,6 @@
           <li>Attend the public meeting (22 July).</li>
           <li>Share this with friends &amp; neighbours.</li>
         </ol>
-
         <div id="mc_embed_signup">
           <form action="https://saveourtrees.us4.list-manage.com/subscribe/post?u=7027db58dc598f1d85dd58b1a&amp;id=8a1ec7b66b&amp;f_id=006cd5edf0"
                 method="post"
@@ -340,44 +402,57 @@
                 target="_blank"
                 novalidate>
             <div id="mc_embed_signup_scroll">
-
               <div class="mc-field-group">
                 <label for="mce-FNAME">First Name <span class="required">(required)</span></label>
                 <input type="text" name="FNAME" id="mce-FNAME" required aria-required="true" />
               </div>
-
               <div class="mc-field-group">
-                <label for="mce-LNAME">Last Name </label>
+                <label for="mce-LNAME">Last Name</label>
                 <input type="text" name="LNAME" id="mce-LNAME" />
               </div>
-
               <div class="mc-field-group">
                 <label for="mce-EMAIL">Email Address <span class="required">(required)</span></label>
                 <input type="email" name="EMAIL" id="mce-EMAIL" required aria-required="true" />
               </div>
-
               <div id="mce-responses" class="clear foot">
                 <div class="response" id="mce-error-response" style="display:none;"></div>
                 <div class="response" id="mce-success-response" style="display:none;"></div>
               </div>
-
-              <!-- Honeypot -->
               <div style="position:absolute; left:-5000px;" aria-hidden="true">
                 <input type="text" name="b_7027db58dc598f1d85dd58b1a_8a1ec7b66b" tabindex="-1" value="">
               </div>
-
               <div class="optionalParent">
                 <div class="clear foot">
                   <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Get Updates" />
                 </div>
               </div>
-
             </div>
           </form>
         </div>
       </div>
     </div>
+
+    <!-- NEW: Map Context + Full Site -->
+    <div class="map-row">
+      <div class="map-col">
+        <img src="./images/mapcontext.jpg" alt="Local area map context" />
+      </div>
+      <div class="map-col">
+        <img src="./images/fullsite.jpg" alt="Proposed quarry expansion site" />
+      </div>
+    </div>
   </section>
+
+  <!-- NEW: Facebook Follow -->
+  <div class="follow-wrapper">
+    <p style="margin-bottom:0.5rem; font-weight:600;">Follow us for updates:</p>
+    <a href="https://facebook.com/SaveOurTreesDevon"
+       class="follow-btn"
+       target="_blank"
+       rel="noopener">
+      Follow us on Facebook
+    </a>
+  </div>
 
   <footer>
     &copy; 2025 Save Kingsteignton Trees Campaign &middot;
@@ -389,17 +464,31 @@
 
   <!-- Mailchimp validation script -->
   <script src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js" defer></script>
+
+  <!-- Modal overlay HTML -->
+  <div class="modal-overlay" id="imgModal">
+    <div class="modal-content">
+      <div class="modal-close" id="modalClose">×</div>
+      <img src="" alt="Zoomed image" id="modalImage">
+    </div>
+  </div>
+
   <script>
-    window.addEventListener('load', function(){
-      if (typeof jQuery !== 'undefined') {
-        (function($){
-          window.fnames=[];window.ftypes=[];
-          fnames[0]='EMAIL';ftypes[0]='email';
-          fnames[1]='FNAME';ftypes[1]='text';
-          fnames[2]='LNAME';ftypes[2]='text';
-        })(jQuery);
-        window.$mcj = jQuery.noConflict(true);
-      }
+    // Lightbox modal for map images
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeBtn = document.getElementById('modalClose');
+
+    document.querySelectorAll('.map-row img').forEach(img => {
+      img.addEventListener('click', () => {
+        modalImg.src = img.src;
+        modal.classList.add('open');
+      });
+    });
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', e => {
+      if (e.target === modal) modal.classList.remove('open');
     });
   </script>
 </body>
